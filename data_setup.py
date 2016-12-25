@@ -12,7 +12,7 @@ import sys
 import os
 #change to home directory crossplatform
 
-os.chdir(os.path.expanducer("~"))
+os.chdir(os.path.expanduser("~"))
 
 main_directory = os.path.join(os.getcwd(),sys.argv[1])
 
