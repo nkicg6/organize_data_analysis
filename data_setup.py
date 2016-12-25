@@ -25,7 +25,7 @@ else:
 def make_subdirs(subname):
     print("making directory: ", subname)
     os.chdir(main_directory)
-    os.mkdir(os.path.join(main_directory, subname)
+    os.mkdir(os.path.join(main_directory, subname))
 
 make_subdirs("Deliver")
 make_subdirs("Develop")
