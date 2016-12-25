@@ -10,18 +10,22 @@ author: Nick George"""
 
 import sys
 import os
-main_directory = sys.argv[1]
+#change to home directory crossplatform
+
+os.chdir(os.path.expanducer("~"))
+
+main_directory = os.path.join(os.getcwd(),sys.argv[1])
+
 if os.path.exists(main_directory):
-    print("A directory named" + sys.arg[1] + " already exists in this working directory.")
+    print("A directory named" + sys.arg[1] + " already exists in your home directory.")
     sys.exit("Error: Directory already exitst." )
 else:
-    new_main_directory = os.path.join(os.getcwd(), main_directory)
-    os.mkdir(new_main_directory)
+    os.mkdir(main_directory)
 
 def make_subdirs(subname):
     print("making directory: ", subname)
-    os.chdir(new_main_directory)
-    os.mkdir(os.path.join(new_main_directory, subname)
+    os.chdir(main_directory)
+    os.mkdir(os.path.join(main_directory, subname)
 
 make_subdirs("Deliver")
 make_subdirs("Develop")
@@ -31,7 +35,7 @@ make_subdirs("Data")
 
 def readme_files(filename,text):
     print("creating file ", filename)
-    os.chdir(new_main_directory)
+    os.chdir(main_directory)
     file_ = open(filename, 'w')
     file_.write(text)
     file_.close()
@@ -40,6 +44,7 @@ def readme_files(filename,text):
 readme_files(".gitignore", "/Data")
 readme_files("readme.md","[ISO_date]-[author_initials]-[2-4 word description].ipynb /n author: Nick George")
 #TODO  git init
+# https://gist.github.com/nathania/2840185
 # possibly from a shell script?
 sys.exit("Done")
 
