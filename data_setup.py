@@ -1,10 +1,11 @@
 #python3
 """ Set up a data analysis project by creating a home directory and adding
-necessary files and directories.Will create new directories in the current
-working directory. Will also git init the main directory.Organization based on:
+necessary files and directories.Will create new directories in the home directory.
+Will also git init the main directory.Organization based on:
 https://www.youtube.com/watch?v=JI1HWUAyJHE&t=169s&index=238&list=WL
-Key:
+Key for for .ipynb files that will be saved in these directories:
     [ISO_date]-[author_initials]-[2-4 word description].ipynb
+
 author: Nick George"""
 
 
@@ -17,9 +18,11 @@ os.chdir(os.path.expanduser("~"))
 main_directory = os.path.join(os.getcwd(),sys.argv[1])
 
 if os.path.exists(main_directory):
-    print("A directory named" + sys.arg[1] + " already exists in your home directory.")
-    sys.exit("Error: Directory already exitst." )
+    print("A directory named" + sys.argv[1] + " already exists in your home directory.")
+    sys.exit("Error: Directory already exists." )
 else:
+    print("Setting up project in: " + sys.argv[1])
+    print("Filepath: " + main_directory)
     os.mkdir(main_directory)
 
 def make_subdirs(subname):
@@ -33,17 +36,19 @@ make_subdirs("Figures")
 make_subdirs("scripts")
 make_subdirs("Data")
 
-def readme_files(filename,text):
+def readme_files(filename,*args):
     print("creating file ", filename)
     os.chdir(main_directory)
     file_ = open(filename, 'w')
-    file_.write(text)
+    for line in args:
+        file_.write(line+'\n')
     file_.close()
 
 #write readmes
 readme_files(".gitignore", "/Data")
-readme_files("readme.md","[ISO_date]-[author_initials]-[2-4 word description].ipynb /n author: Nick George")
+readme_files("readme.md","ipynb naming Key: [ISO_date]-[author_initials]-[2-4 word description].ipynb", "author: Nick George","MORE PROJECT INFO HERE")
 #TODO  git init
+#TODO add datestamp to readme.md file. Optional argument in readme function.
 # https://gist.github.com/nathania/2840185
 # possibly from a shell script?
 sys.exit("Done")
